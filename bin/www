@@ -5,8 +5,20 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('imagecolorizer:server');
+var debug = require('debug')('bin/www');
 var http = require('http');
+
+/**
+ * Load environment varibales using dotenv
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+    var result = require('dotenv').load();
+    
+    if(result.error) {
+        throw result.error;
+    }
+}
 
 /**
  * Get port from environment and store in Express.
