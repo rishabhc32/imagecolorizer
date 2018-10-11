@@ -29,7 +29,7 @@ module.exports = function(incomingMessage) {
     .catch((err) => {   
         debug("Error in coloring image")
         
-        sendErrorMessage(incomingMessage, ErrorText)
+        sendMessage(incomingMessage, ErrorText)
     })
 
 }
