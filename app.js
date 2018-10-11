@@ -17,4 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/getUpdate', getUpdateRouter);
 
+app.use((req, res, next) => {
+    res.sendStatus(404);
+})
+
 module.exports = app;
