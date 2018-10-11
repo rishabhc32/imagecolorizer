@@ -3,16 +3,20 @@ var router = express.Router()
 var validator = require('express-validator/check')
 var debug = require('debug')('route/getUpdate')
 
-/* Get update from telegram webhook */
-router.post('/', [
-    // check if incoming message is a photu
+var bwController = require('../controllers/bwController')
 
+/* Get update from telegram webhook */
+router.post('/', validator.oneOf([
+    // check if incoming message is a photu or '/start'
+    validator.body('message.text').custom(text => {
+        return text === '/start'
+    }),
     validator.body('message.photo').exists()
-],(req, res, next) => {
+]),(req, res, next) => {
     try {
         validator.validationResult(req).throw()
         
-        //do bwController stuff
+        bwController(req.body)
     } catch(err) {
         debug('Incoming message not a photu')
     }
