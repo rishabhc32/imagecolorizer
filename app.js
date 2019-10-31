@@ -8,6 +8,8 @@ var getUpdateRouter = require('./routes/getUpdate');
 
 var app = express();
 
+const token = process.env.BOT_TOKEN;
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -15,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/getUpdate', getUpdateRouter);
+app.use(`/${token}`, getUpdateRouter);
 
 app.use((req, res, next) => {
     res.sendStatus(404);
