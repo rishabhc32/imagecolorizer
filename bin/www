@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
     var result = require('dotenv').load();
     
     if(result.error) {
-        throw result.error;
+        debug(result.error);
     }
 }
 
